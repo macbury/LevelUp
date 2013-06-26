@@ -36,7 +36,8 @@
               android:resource="@xml/authenticator">
           </meta-data>
         </service>
-        <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name=".activity.LoginActivity"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

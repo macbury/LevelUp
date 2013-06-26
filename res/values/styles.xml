@@ -17,7 +17,7 @@
     </style>
     
     <style name="ActionBar" parent="@android:style/Widget.Holo.ActionBar">
-		  <item name="android:background">@drawable/ab_background_light</item>
+		  <item name="android:background">@drawable/actionbar</item>
 		  <item name="android:titleTextStyle">@style/ActionBar.TitleTextStyle</item>
 		  <item name="android:icon">@drawable/rating_important</item>
 		</style>
@@ -53,7 +53,7 @@
     
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
-       <item name="android:actionBarStyle">@style/ActionBar</item>
+      <!-- <item name="android:actionBarStyle">@style/ActionBar</item> -->
     </style>
 
     <style name="LoginFormContainer">
