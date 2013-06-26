@@ -1,12 +1,15 @@
 package com.macbury.levelup.activity;
 
 import com.macbury.levelup.R;
+import com.macbury.levelup.fragments.ActionFragment;
 
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
@@ -15,7 +18,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
   private DrawerLayout          mDrawerLayout;
   private ActionBarDrawerToggle mDrawerToggle;
   private ListView              mDrawerList;
@@ -52,6 +55,10 @@ public class MainActivity extends Activity {
     };
     
     mDrawerLayout.setDrawerListener(mDrawerToggle);
+    
+    ActionFragment actionFragment = new ActionFragment();
+    FragmentManager fragmentManager = getFragmentManager();
+    fragmentManager.beginTransaction().replace(R.id.content_frame, actionFragment).commit();
   }
 
   @Override
@@ -63,7 +70,7 @@ public class MainActivity extends Activity {
   @Override
   public boolean onPrepareOptionsMenu(Menu menu) {
     boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-    //menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
+    //menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
     return super.onPrepareOptionsMenu(menu);
   }
 

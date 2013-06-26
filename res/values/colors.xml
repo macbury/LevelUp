@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <color name="main_color">#FF5161BC</color>
+  <color name="header_color">#FFFFFFFF</color>
   <color name="background_window">#FFE5E5E5</color>
+  <color name="footer_color">#66000000</color>
 </resources>
