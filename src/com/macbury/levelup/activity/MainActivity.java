@@ -1,8 +1,6 @@
 package com.macbury.levelup.activity;
 
 import com.macbury.levelup.R;
-import com.macbury.levelup.R.layout;
-import com.macbury.levelup.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
