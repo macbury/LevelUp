@@ -3,7 +3,7 @@
     <!-- Green Bottom Line -->
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#FF96AA39" />
+            <solid android:color="@color/main_color" />
         </shape>
     </item>
 
