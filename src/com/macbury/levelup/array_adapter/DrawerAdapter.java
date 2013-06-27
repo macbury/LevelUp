@@ -46,7 +46,12 @@ public class DrawerAdapter extends BaseAdapter {
     AQuery aq           = query.recycle(convertView);
     DrawerItem category = getItem(position);
     
-    aq.id(R.id.drawer_color_view).backgroundColor(category.getColor());
+    if (category.getColor() == 0) {
+      aq.id(R.id.drawer_color_view).visibility(View.GONE);
+    } else {
+      aq.id(R.id.drawer_color_view).backgroundColor(category.getColor()).visibility(View.VISIBLE);
+    }
+    
     aq.id(R.id.drawerItemView).text(category.getName());
     
     return convertView;

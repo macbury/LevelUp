@@ -28,7 +28,7 @@ public class ActionFragment extends Fragment {
       .headerLayout(R.layout.profile_header)
       .contentLayout(R.layout.activity_actions_list)
       .lightActionBar(false)
-      .parallax(false);
+      .parallax(true);
     mFadingHelper.initActionBar(activity);
   }
   

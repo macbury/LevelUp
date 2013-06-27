@@ -20,5 +20,11 @@
     <string name="drawer_open">Open drawer</string>
     <string name="drawer_close">close_drawer</string>
     <string name="drawer_all">All</string>
+    <string name="add_action_name">Task</string>
+    <string name="add_action_repeatable">Repeat</string>
+    <string name="add_action_start_skill">Start Skill</string>
+    <string name="add_action_active">Active</string>
+    <string name="add_action_level_learning">0 how much skill increase by each level</string>
+    <string name="add_action_hardness">Hardness</string>
     
 </resources>

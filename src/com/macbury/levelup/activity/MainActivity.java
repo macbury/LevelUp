@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
@@ -21,10 +23,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements OnItemClickListener {
   private DrawerAdapter mCategoryAdapter;
   private DrawerLayout          mDrawerLayout;
   private ActionBarDrawerToggle mDrawerToggle;
@@ -44,6 +48,7 @@ public class MainActivity extends FragmentActivity {
     
     mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
     mDrawerList.setAdapter(mCategoryAdapter);
+    mDrawerList.setOnItemClickListener(this);
     
     actionBar.setDisplayHomeAsUpEnabled(true);
     actionBar.setHomeButtonEnabled(true);
@@ -55,14 +60,23 @@ public class MainActivity extends FragmentActivity {
     
     mDrawerLayout.setDrawerListener(mDrawerToggle);
     
+    selectDrawerItem(0, true);
+  }
+  
+  private void selectDrawerItem(int position, boolean replace) {
+    mDrawerList.setItemChecked(position, true);
     ActionFragment actionFragment   = new ActionFragment();
-    FragmentManager fragmentManager = getFragmentManager();
-    fragmentManager.beginTransaction().replace(R.id.content_frame, actionFragment).commit();
+    FragmentTransaction ft          = getFragmentManager().beginTransaction();
+    
+    ft.replace(R.id.content_frame, actionFragment);
+    ft.commit();
+    mDrawerLayout.closeDrawer(mDrawerList);
   }
 
   private void setupDrawerData() {
     ArrayList<DrawerItem> items = new ArrayList<DrawerItem>();
     DrawerItem allItem          = new DrawerItem();
+    
     allItem.setName(getResources().getString(R.string.drawer_all));
     allItem.setId(DrawerItem.ALL_ITEM);
     items.add(allItem);
@@ -84,7 +98,7 @@ public class MainActivity extends FragmentActivity {
 
   @Override
   public boolean onPrepareOptionsMenu(Menu menu) {
-    boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+    //boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
     //menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
     return super.onPrepareOptionsMenu(menu);
   }
@@ -103,6 +117,18 @@ public class MainActivity extends FragmentActivity {
   
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
+    if (item.getItemId() == R.id.action_new_add) {
+      startActivity(new Intent(this, NewActionActivity.class));
+      return true;
+    } else {
+      return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
+    }
+    
   }
+
+  @Override
+  public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    selectDrawerItem(position, false);
+  }
+  
 }

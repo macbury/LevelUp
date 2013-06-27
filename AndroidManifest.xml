@@ -38,6 +38,7 @@
         </service>
         <activity android:name=".activity.LoginActivity"
             android:theme="@style/AppTheme"></activity>
+        <activity android:name="com.macbury.levelup.activity.NewActionActivity" android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
