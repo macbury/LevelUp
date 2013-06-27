@@ -8,7 +8,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "users")
 public class User extends BaseDaoEnabled<User, Long>  {
-  @DatabaseField(id = true, generatedId = true)
+  @DatabaseField(generatedId = true)
   private int id;
   @DatabaseField(canBeNull=false, defaultValue = "0")
   private long points;

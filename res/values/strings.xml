@@ -19,5 +19,6 @@
     
     <string name="drawer_open">Open drawer</string>
     <string name="drawer_close">close_drawer</string>
+    <string name="drawer_all">All</string>
     
 </resources>

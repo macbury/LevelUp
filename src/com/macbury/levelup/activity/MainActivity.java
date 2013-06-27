@@ -1,6 +1,12 @@
 package com.macbury.levelup.activity;
 
+import java.util.ArrayList;
+
+import com.macbury.levelup.AppDelegate;
 import com.macbury.levelup.R;
+import com.macbury.levelup.array_adapter.DrawerAdapter;
+import com.macbury.levelup.array_adapter.DrawerItem;
+import com.macbury.levelup.db.Category;
 import com.macbury.levelup.fragments.ActionFragment;
 
 import android.os.Bundle;
@@ -19,24 +25,25 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class MainActivity extends FragmentActivity {
+  private DrawerAdapter mCategoryAdapter;
   private DrawerLayout          mDrawerLayout;
   private ActionBarDrawerToggle mDrawerToggle;
   private ListView              mDrawerList;
   
-  private String[] mCityNames;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main_with_drawer);
+    ActionBar actionBar = getActionBar();
     
-    mCityNames    = getResources().getStringArray(R.array.drawer_items);
-    mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-    mDrawerList   = (ListView) findViewById(R.id.left_drawer);
+    mCategoryAdapter    = new DrawerAdapter(this);
+    mDrawerLayout       = (DrawerLayout) findViewById(R.id.drawer_layout);
+    mDrawerList         = (ListView) findViewById(R.id.left_drawer);
+    
+    setupDrawerData();
     
     mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-    mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, mCityNames));
-    
-    ActionBar actionBar = getActionBar();
+    mDrawerList.setAdapter(mCategoryAdapter);
     
     actionBar.setDisplayHomeAsUpEnabled(true);
     actionBar.setHomeButtonEnabled(true);
@@ -44,21 +51,29 @@ public class MainActivity extends FragmentActivity {
     mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
         R.drawable.ic_drawer,
         R.string.drawer_open,
-        R.string.drawer_close) {
-      public void onDrawerClosed(View view) {
-        //getActionBar().setTitle(mTitle);
-      }
-
-      public void onDrawerOpened(View drawerView) {
-        //getActionBar().setTitle(mDrawerTitle);
-      }
-    };
+        R.string.drawer_close);
     
     mDrawerLayout.setDrawerListener(mDrawerToggle);
     
-    ActionFragment actionFragment = new ActionFragment();
+    ActionFragment actionFragment   = new ActionFragment();
     FragmentManager fragmentManager = getFragmentManager();
     fragmentManager.beginTransaction().replace(R.id.content_frame, actionFragment).commit();
+  }
+
+  private void setupDrawerData() {
+    ArrayList<DrawerItem> items = new ArrayList<DrawerItem>();
+    DrawerItem allItem          = new DrawerItem();
+    allItem.setName(getResources().getString(R.string.drawer_all));
+    allItem.setId(DrawerItem.ALL_ITEM);
+    items.add(allItem);
+    
+    for (Category category : AppDelegate.shared().getDBHelper().findAllCategories()) {
+      DrawerItem item = new DrawerItem();
+      item.setCategory(category);
+      items.add(item);
+    }
+    
+    mCategoryAdapter.setItems(items);
   }
 
   @Override

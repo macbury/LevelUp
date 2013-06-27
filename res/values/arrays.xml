@@ -5,4 +5,20 @@
         <item>Tokyo</item>
         <item>London</item>
     </string-array> 
+    
+	<string-array name="category_names">
+		<item>Fitness</item>
+		<item>Culture</item>
+		<item>Cooking</item>
+		<item>Hobby</item>
+		<item>Work</item>
+	</string-array> 
+	
+	<array name="category_colors">
+    <item>#FF666666</item>
+    <item>#FF96AA39</item>
+    <item>#FFC74B46</item>
+    <item>#FFF4842D</item>
+    <item>#FF3F9FE0</item>
+  </array> 
 </resources>

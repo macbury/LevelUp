@@ -6,7 +6,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "actions")
 public class Action extends BaseDaoEnabled<Action, Integer> {
-  @DatabaseField(id = true, generatedId = true)
+  @DatabaseField(generatedId = true)
   private int id;
   @DatabaseField
   private boolean active;
